@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create a new user page</title>
+</head>
+<body>
+
+	<h1>REGISTER</h1>
+	{% if messages %}
+	{% for message in messages %}
+		<p> <font color="red">{{ message }} </font></p>
+	{% endfor %}
+	{% endif %}
+
+	 <form action='/users/create' method='POST'>
+        {% csrf_token %}
+
+          <input type="hidden" name="user_id" value = "">
+          <p><label for="first_name">First Name</label>
+          <input class="person" type='text' name='first_name' value= 'cat'></p>
+
+          <p><label for="last_name">Last Name</label>
+          <input class="person" type='text' name='last_name' value= 'dog'></p>
+
+          <p><label for="Email">Email</label>
+          <input class="person" type='text' name='email' value= 'abc@abc.com'></p>
+
+
+          <input type="submit" value="Add friend">
+       </form>
+
+       <p><a href= '/users'>Go Back </a></p>
+</body>
+</html>

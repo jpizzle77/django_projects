@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Courses Assignment</title>
+</head>
+<body>
+
+	<h1>Add a new course</h1>
+
+	<form action='/courses/create' method='POST'>
+        {% csrf_token %}
+
+          <input type="hidden" name="user_id" value = "">
+          <input type="hidden" name="created_at" value = "">
+          <p><label for="name">Name</label>
+          <p><input class="person" type='text' name='name' value= ></p>
+          <p><label for="description">Description</label></p>
+          <p><textarea rows="5" cols="50" name ="description"></textarea></p>
+
+          <p><input type="submit" value="Add course"></p>
+       </form>
+
+       <div id='course_info'>
+            <table>
+                <tr>
+                  <th>Course Name</th>
+                  <th>Description</th>
+                  <th>Date Added</th>
+                  <th>Actions</th>
+                  
+                </tr>
+                
+            {% for user in users %}
+              <!--<a href="/friends/{{ user.id }}"> Goto person's homepage</a>-->
+              	<tr>
+                  <td>{{ user.name}}</td>
+                  <td>{{ user.description}}</td>
+                  <td> {{ user.created_at }} </td>
+                  <td><a href ='/courses/destroy/{{ user.id }}'>Delete </a></td>  
+                </tr>
+            {% endfor %}
+			
+			</table>
+            </div>
+
+</body>
+</html>

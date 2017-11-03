@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+		<div>
+		   <h1> Register Here</h1>
+
+        {% if messages %}
+          {% for message in messages %}
+           <p>{{ message }} </p>
+          {% endfor %}
+        {% endif %}
+        
+        <form action="{% url 'userdash:register_user' %}" method='POST'>
+         {% csrf_token %}
+
+         <input class="person" type='hidden' name='user_id' value= ''></p>
+          <p><label for="first_name">First Name</label>
+          <input class="person" type='text' name='first_name' value= 'jason'></p>
+
+          <p><label for="last_name">Last Name</label>
+          <input class="person" type='text' name='last_name' value= 'bourne'></p>
+
+          <p><label for="Email">Email</label>
+          <input class="person" type='text' name='email' value= 'abc@abc.com'></p>
+
+          <p><label for="password">Password</label>
+          <input class="person" type='text' name='password' value= '1'></p>
+
+          <p><label for="confirm_password">Confirm Password</label>
+          <input class="person" type='text' name='confirm_password' value= '1'></p>
+
+          <input type="submit" value="Register!">
+
+         </form>
+         <p><a href = "{% url 'userdash:login' %}"> Already Registered? Click here to login</a></p>
+         </div>
+</body>
+</html>

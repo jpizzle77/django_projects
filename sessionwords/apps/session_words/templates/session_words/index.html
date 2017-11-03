@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Session words</title>
+</head>
+
+	<div id="wrapper">
+
+		<div id="input">
+		<h1>Add a new word</h1>
+
+		
+		<!--{% for word in request.session.words %}
+			<p>{{ word }} 	</p>
+		{% endfor %}-->
+
+
+		<form action= "/process" method ='POST'>
+
+		{% csrf_token %}
+
+		  <p><input type="text" name="text"></p>
+		  <input type="radio" name="color" value="red"> Red<br>
+		  <input type="radio" name="color" value="blue"> Blue<br>
+		  <input type="radio" name="color" value="green"> Green 
+		  <p><input type="checkbox" name="big_font" value="big"> show in BIG FONTS!</p>
+		  <p><input type="submit" value="Submit"></p>
+		</form> 
+	</div>
+
+	<div id="output">
+
+	<a href="/clear" >Clear Session </a>
+	
+		 {% for word in request.session.words %}
+
+		 	
+		 	<p><font color="{{ word.color }}">{{ word.text }} {{ word.time}}</font> </p>
+		 {% endfor %}
+
+	</div>
+
+
+
+	</div><!-- end of DIV WRAPPER-->		
+<body>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dojo Survey</title>
+		
+	</head>
+	
+	<body>
+	<div><h3>Thanks for submitting this form! You have submitted this form {{ request.session.count }} times</h3></div>
+		<div id="wrapper">
+			<h1> Submitted Info </h1>
+			<div id="info">
+				<p> Name: </p>
+				<p> Dojo Location:  </p>
+				<p> Favorite Language:  </p>
+				<p> Comment:  </p>
+			</div> <!--end of info div-->
+
+			<div id ="submitted_info">
+				<p>{{ request.session.name }} </p>
+				<p>{{ request.session.location }} </p>
+				<p>{{ request.session.language }}</p>
+				<p>{{ request.session.comment }} </p>
+			</div> 
+
+			<a href="/">Go back </a>
+		</div> <!-- end of wrapper div-->
+
+	</body>
+</html>

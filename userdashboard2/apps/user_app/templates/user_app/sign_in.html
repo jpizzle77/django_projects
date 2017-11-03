@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id= "wrapper">
+
+		{% if messages %}
+          {% for message in messages %}
+           <p>{{ message }} </p>
+          {% endfor %}
+        {% endif %}
+        <h3><a href = "{% url 'user_app:clear' %}"> Log out </a></h3>
+	<h1>Sign In</h1>
+        
+  <form action ="{% url 'user_app:login' %}" method ='POST'>
+       
+        {% csrf_token %}
+
+          <input class="person" type='hidden' name='user_id' value= ''></p>
+
+          <p><label for="Email">Email</label>
+          <input class="person" type='text' name='email' value= 'abc@abc.com'></p>
+
+          <p><label for="password">Password</label>
+          <input class="person" type='text' name='password' value= '123'></p>
+
+        
+        <input type="submit" value="Sign In">
+
+        <p><a href = "{% url 'user_app:register' %}"> Don't have an account? Click here to register</a></p>
+
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+		<div>
+		   
+
+       <h3> <a href ="{% url 'dashboard:admin'  %}">Return to dashboard </a></h3>
+
+        {% if messages %}
+          {% for message in messages %}
+           <p>{{ message }} </p>
+          {% endfor %}
+        {% endif %}
+        
+        <div>
+        
+        <h1>Edit information</h1>
+        <form action="{% url 'users:edit_info' user.id %}" method='POST'>
+         {% csrf_token %}
+
+          <input class="person" type='hidden' name='user_id' value= "{{user.id}}"></p>
+          <p><label for="first_name">First Name</label>
+          <input class="person" type='text' name='first_name' value= "{{user.first_name}}"></p>
+
+          <p><label for="last_name">Last Name</label>
+          <input class="person" type='text' name='last_name' value= '{{user.last_name}}'></p>
+
+          <p><label for="Email">Email</label>
+          <input class="person" type='text' name='email' value= '{{user.email}}'></p>
+          
+          <input type="submit" value="Save">
+
+          </form>
+          </div>
+
+          <div>
+
+            <h1>Change Password</h1>
+            <form action="{% url 'users:edit_info' user.id%}" method='POST'>
+              {% csrf_token %}
+              <p><label for="password">Password</label>
+              <input class="person" type='text' name='password' value= '1'></p>
+
+              <p><label for="confirm_password">Confirm Password</label>
+              <input class="person" type='text' name='confirm_password' value= '1'></p>
+
+              <input type="submit" value="Save">
+            </form>
+
+         </div>
+
+
+         
+         </div>
+</body>
+</html>

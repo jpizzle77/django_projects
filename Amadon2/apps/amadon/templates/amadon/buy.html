@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>THANK YOU FOR YOUR BUSINESS</h1>
+	<h2> We charged your credit card ${{ request.session.total }}</h2>
+	<p> You have ordered {{ request.session.items_bought }} items so far and spent ${{ request.session.total_spent }}  with Amadon.com</p>
+
+	<button><a href="/">Go back </a></button>
+</body>
+</html>

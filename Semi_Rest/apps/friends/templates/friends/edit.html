@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show the User Id</title>
+</head>
+<body>
+
+		<h1>EDIT USER</h1>
+			{% if messages %}
+			{% for message in messages %}
+				<p> <font color="red">{{ message }} </font></p>
+			{% endfor %}
+			{% endif %}
+
+		<form action='/users/{{ user.id }}/edited_info' method='POST'>
+        {% csrf_token %}
+
+          <input type="hidden" name="user_id" value = "{{ user.id }}">
+          <p><label for="first_name">First Name</label>
+          <input class="person" type='text' name='first_name' value= '{{ user.first_name }}'></p>
+
+          <p><label for="last_name">Last Name</label>
+          <input class="person" type='text' name='last_name' value= '{{ user.last_name }}'></p>
+
+          <p><label for="Email">Email</label>
+          <input class="person" type='text' name='email' value= '{{ user.email }}'></p>
+
+
+          <input type="submit" value="Edit user info">
+       </form>
+		
+		
+        
+     
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show the User Id</title>
+</head>
+<body>
+
+<h2>Are you sure you want to delete this course?</h2>
+
+		<form action='/courses/confirm_delete/{{ user.id }}' method='POST'>
+        {% csrf_token %}
+
+          <input type="hidden" name="user_id" value = "{{ user.id }}">
+          <p><label for="name">Name</label>
+          <input class="person" type='text' name='first_name' value= '{{ user.name }}'></p>
+
+          <p><label for="description">Description</label>
+          <input class="person" type='text' name='description' value= '{{ user.description }}'></p>
+
+          <p><label for="created_at">Added on</label>
+          <input class="person" type='text' name='created_at' value= '{{ user.created_at }}'></p>
+
+          
+          <input type="submit" value="Yes delete the course!!">
+       </form>
+
+       <p><a href="/courses/"> No </a> </p>
+		
+		
+        
+     
+</body>
+</html>

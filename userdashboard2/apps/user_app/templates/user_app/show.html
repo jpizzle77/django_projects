@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+    <p><p><a href =  "{% url 'comment_app:guest' %}"> Dashboard</a></p></p>
+		<h2>{{ user.first_name }} {{user.last_name }}</h2>
+
+		<p>Registered at : {{ user.created_at }}</p>
+		<p>	User Id: {{ user.id }}</p>
+		<p>Email Address: {{ user.email }}</p>
+
+  
+
+		<p>Description: {{ description.description }}</p>
+
+
+		 <div>
+     <h1></h1>
+
+    {% if description %}
+    
+
+
+
+      
+            <h1>Leave a message for {{ user.first_name }}</h1>
+            <form action="{% url 'comment_app:comment' %}" method='POST'>
+
+            {% csrf_token %}
+
+              <input class="person" type='hidden' name='user_id' value= "{{ user.id }}"></p><!--passing over the user id for the profile that was clicked on to comment-->
+              <input class="person" type='hidden' name='comment_user_id' value= "{{ request.session.user.user_id }}"></p><!--passing over the user id or the person that is writing the comment-->
+              <input class="person" type='hidden' name='description_id' value= "{{ description.id }}"></p><!-- passing over the description id or the description the user is making a comment on-->
+              <input class="person" type='hidden' name='comment_id' value= ""></p><!--this will let you set the comment to an id #-->
+
+
+              <textarea name ="comment" rows="4" cols="50"></textarea><!-- passing over the comment that is made-->
+              <p></p>
+              <input type="submit" value="Post">
+
+            </form>
+     
+      
+
+          {% if comments %} <!-- where someone leaves a message on someone's description-->
+            
+         
+
+              {% for comment in comments %}
+
+                 <p>{{ comment.user.id}} comment user id </p>
+                <p> {{ comment.description_id }}  comment description id </p>
+                <p> {{ description.id }}  description id </p>
+              
+
+                    <p>----------------------------------------------------------</p>
+
+                {% if description.id == comment.description_id %} <!--matching the the 2 tables-->
+             
+                <h3>{{ comment.user.first_name }} {{ comment.user.last_name }} wrote</h3>
+
+                 <textarea name ="comment" rows="3" cols="40">{{comment.message}}</textarea> 
+
+            
+          {% if replies %} <!-- where someone leaves a reply on the comment/message that was put on someone's description  -->
+            
+            {% for reply in replies %}
+
+                 <p> {{ comment.user.id}} comment.user.id </p>
+                 <p>{{ comment.description_id }} comment.description_id </p>
+                 <p>{{ description.id }} description.id </p>
+                 
+            <p>------------------------------------------------------</p>
+                 <p> {{ reply.user_id }} reply.user.id</p>
+                 <p> {{ comment.id }}  comment.id </p>
+                 <p> {{ reply.comment_id }} reply.comment_id</p>
+            
+                  <p>{{comment.id }} == {{reply.comment_id }}<--------------do these ids match ?</p>
+                    <p>here's the comment ----> {{comment.message }}</p>
+                    <p>{{ reply.user.id}} == {{ comment.user_id }}<------this will check to see if the person who left the first message is the same person who is replying</p>
+                    <p>{{ description.user_id }} == {{ user.id }}<--------------do these ids match ?</p>
+          
+          
+
+                {% if comment.id == reply.comment_id %} 
+
+
+                     {% if reply.user.id == comment.user_id %} 
+                    
+
+                      <h3>{{ comment.user.first_name }} {{ comment.user.last_name }} wrote</h3>
+                      <textarea name ="reply" rows="2" cols="30">{{reply.reply }}</textarea>
+
+                     {% else %}
+
+                     {% if description.user_id == user.id  %} 
+                    
+
+                      <h3>{{ comment.user.first_name }} {{ comment.user.last_name }} wrote</h3>
+                      <textarea name ="reply" rows="2" cols="30">{{reply.reply }}</textarea>
+
+                     {% endif %}
+                     {% endif %}
+                     {% endif %}
+                   
+
+
+
+           {% endfor %} 
+
+                
+          {% endif %}    
+
+
+                
+      
+
+
+          <form action="{% url 'comment_app:reply' %}" method='POST'>
+
+            {% csrf_token %}
+              <input class="person" type='hidden' name='user_id' value= "{{ user.id }}"></p>
+              <input class="person" type='hidden' name='comment_id' value= "{{ comment.id }}"></p><!--passing over the user id for the profile that was clicked on to comment-->
+              <input class="person" type='hidden' name='reply_user_id' value= "{{ request.session.user.user_id }}"></p><!--passing over the user id or the person that is writing the comment-->
+             
+              <input class="person" type='hidden' name='reply_id' value= "1"></p><!--this will let you set the comment to an id #-->
+
+
+              <textarea name ="reply" rows="2" cols="30" value= "write something here"></textarea><!-- passing over the comment that is made-->
+              <p></p>
+              <input type="submit" value="Post">
+
+            </form>
+
+
+
+<!--..........................................................................................-->
+
+          
+<!--..........................................................................................-->
+
+          {% endif %} <!--......end of ' if description.id = comment.description_id' line 53 ..................-->
+
+        {% endfor %}  <!--......end of 'for comment in comment' line 49 ..................-->
+              
+     {% endif %}  <!--......end of 'if comments' line 47' ..................-->
+
+    
+
+
+     {% endif %} <!--......end of ' if descriptions' ..................-->
+
+
+             
+
+    
+                 
+            
+      </div>
+		
+</body>
+</html>

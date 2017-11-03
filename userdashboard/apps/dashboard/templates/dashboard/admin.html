@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<h1>Manage Users</h1>
+
+      <p> <a href = "{% url 'userdash:create_user' %}"> Add New User </a> </p>
+       <p> <a href = "{% url 'users:clear' %}"> Clear Session </a> </p>
+
+      
+
+       <div id='course_info'>
+            <table>
+                <tr>
+                  <th> ID</th>
+                  <th>  Name</th>
+                  <th>Email</th>
+                  <th>Date Added</th>
+                  <th>User level</th>
+                  <th>Actions</th>
+                  
+                </tr>
+                
+            {% for user in users %}
+              <!--<a href="/friends/{{ user.id }}"> Goto person's homepage</a>-->
+              	<tr>
+                  <td> {{ user.id }}</td>
+                  <td> <a href= "{% url 'users:show' user.id %}">{{ user.first_name }} {{user.last_name}} </a></td>
+                  <td> {{ user.email}}</td>
+                  <td> {{ user.created_at }} </td>
+                  <td> {{ request.session.user_level }} </td>
+                  <td> <a href = "{% url 'users:edit' user.id %}"> Edit </a> </td>
+                  <td> <a href = "{% url 'users:remove' user.id %}"> Remove </a> </td>
+
+                   
+                </tr>
+            {% endfor %}
+			
+			</table>
+            </div>
+
+</body>
+</html>
